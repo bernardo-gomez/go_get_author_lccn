@@ -117,8 +117,13 @@ func worldcat_identities_link(doc_id string ,linked_data_host string) (string , 
 
 func main(){
 
-   // plug in your own ALMA mms_id in doc_id:="9936709901402486"
-    doc_id:="9936709901402486"
+   //  read ALMA mms_id from the command line
+   if len(os.Args) < 2{
+        fmt.Fprintf(os.Stderr, "usage: %s mms_id\n",os.Args[0]);
+        return
+   }
+   doc_id:= os.Args[1]
+   
     linked_data_host:="https://open-na.hosted.exlibrisgroup.com/alma/01GALI_EMORY/bf/entity/instance/"
     identities_link,outcome := worldcat_identities_link(doc_id,linked_data_host)
     if outcome == 0{
